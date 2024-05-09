@@ -11,7 +11,6 @@ from time import sleep
 import os
 import signal
 import matplotlib.pyplot as plt
-#import parse
 import csv
 import pandas as pd
 import threading
@@ -25,6 +24,8 @@ DEFAULT_LINK_CONFIG = 'DB_S'
 DEFAULT_NUM_HOST_PAIRS = 1
 DEFAULT_ALGS = []
 DEFAULT_DELAYS = [0]
+
+FTRACE_BUFFER_SIZE = 5632
 
 VALID_ALGS = {
   'reno': True,
@@ -176,7 +177,7 @@ def genDescription(algs, config_name):
 # config_name: name of link configuration defined in Dumbbell class
 # delays: list of floating point numbers representing a delay before starting a
 #         clients iperf3 flow. 
-def testDriverSingle(topo, algs=DEFAULT_ALGS, runtime=DEFAULT_RUNTIME, config_name=DEFAULT_LINK_CONFIG, delays=DEFAULT_DELAYS):
+def testDriver(topo, algs=DEFAULT_ALGS, runtime=DEFAULT_RUNTIME, config_name=DEFAULT_LINK_CONFIG, delays=DEFAULT_DELAYS):
   dump_procs = []
   threads = []
   net = Mininet(topo)
@@ -187,10 +188,11 @@ def testDriverSingle(topo, algs=DEFAULT_ALGS, runtime=DEFAULT_RUNTIME, config_na
   s_port = '5001'
 
   net.start()
+
+  setFtraceBuffer(FTRACE_BUFFER_SIZE)
   
   print("\nUsing the following node connections: ")
   # Mininet function, prints node connections
-  #dumpNodeConnections(net.hosts)
   dumpNetConnections(net)
   # get names of source and destination hosts that will be creating tcp flows
   host_pair_names = topo.getNodePairNames()
@@ -425,7 +427,7 @@ if __name__ == '__main__':
     else:
       topo = config['custom']
 
-    testDriverSingle(topo, config['algs'], config['runtime'], config['lc_name'], config['delays'])
+    testDriver(topo, config['algs'], config['runtime'], config['lc_name'], config['delays'])
   except ArgumentError as e:
     print(e)
 

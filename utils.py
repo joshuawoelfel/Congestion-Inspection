@@ -9,6 +9,7 @@ import pandas as pd
 #import shlex
 
 FTRACE_PATH = "/sys/kernel/debug/tracing"
+FTRACE_BUFFER_SIZE_PATH = "/sys/kernel/debug/tracing/buffer_size_kb"
 
 DEFAULT_OUTPUT_DIR = "/home/mininet/results/"
 
@@ -19,6 +20,20 @@ OFFSET_CWND = 11
 OFFSET_SSTHRESH = 12
 OFFSET_SRTT = 14
 
+def setFtraceBuffer(size):
+  with open(FTRACE_BUFFER_SIZE_PATH, 'r+') as buffer_size_file:
+    line = buffer_size_file.readline()
+    
+    buffer_size_file.seek(0)
+    buffer_size_file.write(str(size))
+    buffer_size_file.truncate()
+
+    #words = line.split()
+  
+    #for word in words:
+    #  expanded_val = parse.parse('  
+
+  #return buffer_size
 # Creates a unique output directory for a test run using description.
 # 
 #TODO: don't use constant defined output directory location, instead
