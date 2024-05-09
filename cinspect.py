@@ -189,7 +189,7 @@ def testDriver(topo, algs=DEFAULT_ALGS, runtime=DEFAULT_RUNTIME, config_name=DEF
 
   net.start()
 
-  setFtraceBuffer(FTRACE_BUFFER_SIZE)
+  prev_buffer_size = setFtraceBuffer(FTRACE_BUFFER_SIZE)
   
   print("\nUsing the following node connections: ")
   # Mininet function, prints node connections
@@ -289,6 +289,7 @@ def testDriver(topo, algs=DEFAULT_ALGS, runtime=DEFAULT_RUNTIME, config_name=DEF
   # to fix this
   # TODO see if we can automate this at beginning of run
   net.stop()
+  setFtraceBuffer(prev_buffer_size)
   print("\n\nResults saved to the following location: " + output_dir)
   
 

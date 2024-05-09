@@ -13,6 +13,7 @@ FTRACE_BUFFER_SIZE_PATH = "/sys/kernel/debug/tracing/buffer_size_kb"
 
 DEFAULT_OUTPUT_DIR = "/home/mininet/results/"
 
+
 OFFSET_TIME = 3
 OFFSET_SRC = 5
 OFFSET_DST = 6
@@ -22,18 +23,17 @@ OFFSET_SRTT = 14
 
 def setFtraceBuffer(size):
   with open(FTRACE_BUFFER_SIZE_PATH, 'r+') as buffer_size_file:
-    line = buffer_size_file.readline()
-    
+    prev_buffer_size = int(buffer_size_file.readline().split()[0])
+    #print(prev_buffer_size)
+        
     buffer_size_file.seek(0)
     buffer_size_file.write(str(size))
     buffer_size_file.truncate()
+    
+    return prev_buffer_size
+    
+    
 
-    #words = line.split()
-  
-    #for word in words:
-    #  expanded_val = parse.parse('  
-
-  #return buffer_size
 # Creates a unique output directory for a test run using description.
 # 
 #TODO: don't use constant defined output directory location, instead
