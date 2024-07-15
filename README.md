@@ -1,5 +1,5 @@
 # Congestion-Inspection
-Congestion Inspection is a python-based tool to analyze, inspect, and automate testing of TCP congestion control behavior in emulated network environments using Mininet and Linux-based network performance tools.
+Congestion Inspection is a python-based tool to analyze, inspect, and automate testing of TCP congestion control behavior in emulated network environments using Mininet and Linux-based network performance tools. This project was built using Mininet's provided Ubuntu VM, and may be incompatible in other environments. See dependency section for additional information.
 
 ## Usage
 Download and run as sudo:
@@ -43,19 +43,17 @@ Each run of cinspect.py will generate a new directory with results for the follo
 The topology of the network is found in dumbell.py, with the link bandwidths, delays, and buffer sizes customizable using the **LINK_CONFIG** dictionary. Specify the link config using the **-l** option followed by the desired **LINK_CONFIG** key.
 
 ## Dependencies
-Congestion Inspection was built using [Mininet 2.3.0](https://github.com/mininet/mininet/releases/) using their provided Ubuntu 20.04.1 VM image. See Mininet's install docs for more information.
+Congestion Inspection was built using [Mininet 2.3.0](https://github.com/mininet/mininet/releases/) using their provided Ubuntu 20.04.1 VM image. See Mininet's [install docs](https://github.com/mininet/mininet/blob/master/INSTALL) for more information.
 Additional Linux tools required:
-- iperf3
-- ping
-- tcpdump
-- ftrace (tcp_probe tracepoint) based on Ubuntu 20.04.1
+- [iperf3](https://iperf.fr/)
+- [ping](https://man7.org/linux/man-pages/man8/ping.8.html)
+- [tcpdump](https://www.tcpdump.org/)
+- [ftrace](https://www.kernel.org/doc/html/latest/trace/ftrace.html) (tcp_probe tracepoint) based on Ubuntu 20.04.1 
 
 Python dependencies:
-- pandas
-- matplotlib
-- parse
-
-## Contributions
-
+- [pandas](https://pandas.pydata.org/)
+- [matplotlib](https://matplotlib.org/)
+- [parse](https://pypi.org/project/parse/)
 
 ## Contact
+Contact joshua.woelfel@gmail.com for any inquiries.
